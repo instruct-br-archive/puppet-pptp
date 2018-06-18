@@ -1,6 +1,7 @@
 ---
 fixtures:
   forge_modules:
-    stdlib: "puppetlabs/stdlib"
+    firewalld: "crayfishx/firewalld"
     kmod: "camptocamp/kmod"
+    stdlib: "puppetlabs/stdlib"
     systemd: "camptocamp/systemd"

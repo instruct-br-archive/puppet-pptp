@@ -99,9 +99,9 @@ class { 'pptp':
 
 ```puppet
 pptp
-pptp::client::install (private)
-pptp::client::service (private)
-pptp::client::connections (private)
+pptp::install (private)
+pptp::service (private)
+pptp::connections (private)
 ```
 
 ### Parameters type
