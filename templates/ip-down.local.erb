@@ -1,0 +1,5 @@
+<%# Script para encerrar as conexoes -%>
+#!/bin/bash
+<% scope['pptp::connections'].each do |connection| -%>
+ip route del <%= connection['route'] %> dev ppp0
+<% end -%>

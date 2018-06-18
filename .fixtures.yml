@@ -1,0 +1,6 @@
+---
+fixtures:
+  forge_modules:
+    stdlib: "puppetlabs/stdlib"
+    kmod: "camptocamp/kmod"
+    systemd: "camptocamp/systemd"

@@ -1,0 +1,5 @@
+pty "pptp <%= @connection['ip'] %> --nolaunchpppd"
+name <%= @connection['username'] %>
+password <%= @connection['password'] %>
+remotename PPTP
+require-mppe-128
