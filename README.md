@@ -30,6 +30,8 @@ This module was tested under these platforms
 - CentOS 7
 - Scientific  7
 - Oracle Linux 7
+- Debian 9
+- Ubuntu 16.04
 
 Tested only in x86_64 arch.  
 
@@ -180,6 +182,7 @@ This is an example of files under modules/pptp/data
 
 ```
 oses/family/RedHat.yaml
+oses/family/Debian.yaml
 oses/distro/CentOS/7.yaml
 oses/distro/Scientific/7.yaml
 oses/distro/OracleLinux/7.yaml
