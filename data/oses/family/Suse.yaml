@@ -1,0 +1,4 @@
+---
+pptp::firewall_manage: false
+pptp::package_ensure: installed
+pptp::package_name: pptp # unused

@@ -4,8 +4,17 @@
 #
 class pptp::install {
   if $pptp::package_manage {
-    package { $pptp::package_name:
-      ensure => $pptp::package_ensure,
+    if 'Suse' == $facts['os']['family'] {
+      package { 'pptp':
+        ensure          => $pptp::package_ensure,
+        provider        => 'rpm',
+        source          => 'http://download.opensuse.org/repositories/home:/gallochri/SLE_15/x86_64/pptp-1.10.0-3.1.x86_64.rpm',
+        install_options => '--force', # this package will replace `/etc/ppp`
+      }
+    } else {
+      package { $pptp::package_name:
+        ensure => $pptp::package_ensure,
+      }
     }
 
     file { '/sbin/pon':
@@ -45,6 +54,20 @@ class pptp::install {
       selrange => 's0',
       selrole  => 'object_r',
       content  => "ppp_mppe\n",
+    }
+
+    # HACK para carregar o modulo no SLES 12
+    if 'Suse' == $facts['os']['family'] {
+      file { '/etc/sysconfig/kernel':
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => 'MODULES_LOADED_ON_BOOT=ppp_mppe',
+        before  => [
+          Kmod::Load['ppp_mppe'],
+        ],
+      }
     }
 
     kmod::load { 'ppp_mppe': }
