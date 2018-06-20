@@ -32,6 +32,7 @@ This module was tested under these platforms
 - Oracle Linux 7
 - Debian 9
 - Ubuntu 16.04
+- SLES 12
 
 Tested only in x86_64 arch.  
 
@@ -183,6 +184,7 @@ This is an example of files under modules/pptp/data
 ```
 oses/family/RedHat.yaml
 oses/family/Debian.yaml
+oses/family/Suse.yaml
 oses/distro/CentOS/7.yaml
 oses/distro/Scientific/7.yaml
 oses/distro/OracleLinux/7.yaml
@@ -196,7 +198,7 @@ This module was developed using
 
 - Puppet 5.5.3
   - Hiera 3.4.3 (v5 format)
-  - Facter 3.11.1
+  - Facter 3.11.2
 - CentOS 7.5
 - VirtualBox 5.2.12
 - Vagrant 2.1.1
