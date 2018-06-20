@@ -1,5 +1,5 @@
 ---
-pptp::package_manage: true
-pptp::package_ensure: installed
-pptp::module_manage: true
 pptp::firewall_manage: true
+pptp::module_manage: true
+pptp::package_ensure: installed
+pptp::package_manage: true

@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 Add support to EL 7 (RHEL, CentOS, Oracle Linux and Scientific Linux)
 Add support to Debian 9 and Ubuntu 16.04
+Add support to SLES 12
 
 **Bugfixes**
 

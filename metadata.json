@@ -16,7 +16,7 @@
     },
     {
       "name": "crayfishx/firewalld",
-      "version_requirement": ">= 3.4.1 < 4.0.0"
+      "version_requirement": ">= 3.4.0 < 4.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -54,6 +54,12 @@
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
         "9"
+      ]
+    },
+    {
+      "operatingsystem": "SLES",
+      "operatingsystemrelease": [
+        "12"
       ]
     }
   ],
