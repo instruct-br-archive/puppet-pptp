@@ -24,7 +24,7 @@ The main objective is to manage pptp with minimal intervention in the default fi
 
 ## Supported Platforms
 
-This module was tested under these platforms
+This module was tested under these platforms, all in x86_64 arch:
 
 - RedHat 7
 - CentOS 7
@@ -34,15 +34,11 @@ This module was tested under these platforms
 - Ubuntu 16.04
 - SLES 12
 
-Tested only in x86_64 arch.  
-
 ## Requirements
 
 ### Pre-Reqs
 
-You need internet to install packages.
-
-### Requirements
+You need internet access to install packages.
 
 - Puppet >= 5.x
   - Hiera >= 3.4
@@ -79,19 +75,7 @@ class { 'pptp':
   package_manage  = true,
   module_manage   = true,
   firewall_manage = false,
-  Array[
-    Struct[
-      {
-        name     => String,
-        ip       => String,
-        route    => String,
-        username => String,
-        password => String,
-        running  => Boolean,
-        enable   => Boolean,
-      }
-    ]
-  ]                                                             $connections     = [],
+  connections     = [],
   package_ensure  = 'latest',
 }
 ```
@@ -145,15 +129,33 @@ Type: Enum['present','installed','absent','purged','held','latest']
 
 The type of ensure the managed package should be enforced. Default to latest.
 
-### Hiera Keys Sample
+#### `options_file`
+
+Type: String
+
+The name of the file with the configuration. Default to `/etc/pptp/options.pptp`.
+
+### Hiera Keys
+
+#### `options`
+
+Type: Array[String]
+
+A list with PPTP options, as strings. Default to an empty array.
+
+#### Hiera Keys Sample
 
 ```yaml
 ---
-pptp::package_name: 'pptp'
-pptp::package_manage: true
-pptp::package_ensure: installed
-pptp::module_manage: true
 pptp::firewall_manage: true
+pptp::module_manage: true
+pptp::options:
+  - require-mppe-128
+  - require-mschap-v2
+pptp::options_file: '/etc/ppp/options.pptp'
+pptp::package_ensure: installed
+pptp::package_manage: true
+pptp::package_name: 'pptp'
 ```
 
 ### Hiera module config
@@ -182,6 +184,7 @@ hierarchy:
 This is an example of files under modules/pptp/data
 
 ```
+common.yaml
 oses/family/RedHat.yaml
 oses/family/Debian.yaml
 oses/family/Suse.yaml

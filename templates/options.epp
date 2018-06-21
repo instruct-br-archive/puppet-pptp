@@ -1,0 +1,6 @@
+<%# options template -%>
+# Managed by Puppet
+# pptp module
+<% $options.each |$option| { -%>
+<%= $option %>
+<% } -%>

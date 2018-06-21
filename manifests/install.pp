@@ -42,6 +42,27 @@ class pptp::install {
     }
   }
 
+  $options_array = lookup(
+    'pptp::options',
+    Array[String],
+    'unique',
+    []
+  )
+
+  file { $pptp::options_file:
+    ensure   => file,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0644',
+    seluser  => 'system_u',
+    selrole  => 'object_r',
+    seltype  => 'usr_t',
+    selrange => 's0',
+    content  => epp('pptp/options.epp', {
+      options => $pptp::install::options_array,
+    }),
+  }
+
   if $pptp::module_manage {
     include ::kmod
     file { '/etc/modules-load.d/pptp.conf':

@@ -18,6 +18,7 @@ describe 'pptp' do
 
       it { is_expected.to contain_file('/sbin/pon') }
       it { is_expected.to contain_file('/sbin/poff') }
+      it { is_expected.to contain_file('/etc/ppp/options.pptp') }
 
       case os_facts[:osfamily]
       when 'Debian'
@@ -56,6 +57,7 @@ describe 'pptp' do
 
       it { is_expected.to contain_file('/sbin/pon') }
       it { is_expected.to contain_file('/sbin/poff') }
+      it { is_expected.to contain_file('/etc/ppp/options.pptp') }
 
       case os_facts[:osfamily]
       when 'Debian'
@@ -89,6 +91,7 @@ describe 'pptp' do
 
       it { is_expected.not_to contain_file('/sbin/pon') }
       it { is_expected.not_to contain_file('/sbin/poff') }
+      it { is_expected.to contain_file('/etc/ppp/options.pptp') }
 
       case os_facts[:osfamily]
       when 'Debian'
@@ -125,6 +128,7 @@ describe 'pptp' do
 
       it { is_expected.to contain_file('/sbin/pon') }
       it { is_expected.to contain_file('/sbin/poff') }
+      it { is_expected.to contain_file('/etc/ppp/options.pptp') }
 
       case os_facts[:osfamily]
       when 'Debian'

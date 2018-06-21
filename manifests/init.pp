@@ -23,6 +23,7 @@ class pptp (
     ]
   ]                                                             $connections     = [],
   Enum['present','installed','absent','purged','held','latest'] $package_ensure  = 'latest',
+  String                                                        $options_file    = '/etc/ppp/options.pptp',
 ) {
   include pptp::install
   include pptp::service
