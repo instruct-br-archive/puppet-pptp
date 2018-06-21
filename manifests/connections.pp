@@ -13,7 +13,7 @@ class pptp::connections {
     selrole  => 'object_r',
     seltype  => 'usr_t',
     selrange => 's0',
-    content  => template('pptp/chap-secrets.epp'),
+    content  => epp('pptp/chap-secrets.epp'),
   }
 
   if defined('$pptp::connections') {
