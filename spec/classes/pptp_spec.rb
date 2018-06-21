@@ -10,6 +10,14 @@ describe 'pptp' do
       it { is_expected.to contain_class('pptp::install') }
       it { is_expected.to contain_class('pptp::service') }
       it { is_expected.to contain_class('pptp::connections') }
+      it { is_expected.to contain_file('/etc/ppp/chap-secrets') }
+
+      it { is_expected.to contain_class('kmod') }
+      it { is_expected.to contain_kmod__load('ppp_mppe') }
+      it { is_expected.to contain_file('/etc/modules-load.d/pptp.conf') }
+
+      it { is_expected.to contain_file('/sbin/pon') }
+      it { is_expected.to contain_file('/sbin/poff') }
 
       case os_facts[:osfamily]
       when 'Debian'
@@ -21,6 +29,7 @@ describe 'pptp' do
       when 'Suse'
         it { is_expected.to contain_package('pptp') }
         it { is_expected.not_to contain_class('firewalld') }
+        it { is_expected.to contain_file('/etc/sysconfig/kernel') }
       end
     end
 
@@ -37,7 +46,26 @@ describe 'pptp' do
       it { is_expected.to contain_class('pptp::install') }
       it { is_expected.to contain_class('pptp::service') }
       it { is_expected.to contain_class('pptp::connections') }
+      it { is_expected.to contain_file('/etc/ppp/chap-secrets') }
+
+      it { is_expected.to contain_class('kmod') }
+      it { is_expected.to contain_kmod__load('ppp_mppe') }
+      it { is_expected.to contain_file('/etc/modules-load.d/pptp.conf') }
+
       it { is_expected.not_to contain_class('firewalld') }
+
+      it { is_expected.to contain_file('/sbin/pon') }
+      it { is_expected.to contain_file('/sbin/poff') }
+
+      case os_facts[:osfamily]
+      when 'Debian'
+        it { is_expected.to contain_package('pptp-linux') }
+      when 'RedHat'
+        it { is_expected.to contain_package('pptp') }
+      when 'Suse'
+        it { is_expected.to contain_package('pptp') }
+        it { is_expected.to contain_file('/etc/sysconfig/kernel') }
+      end
     end
 
     context "on #{os} with package management disabled" do
@@ -53,16 +81,26 @@ describe 'pptp' do
       it { is_expected.to contain_class('pptp::install') }
       it { is_expected.to contain_class('pptp::service') }
       it { is_expected.to contain_class('pptp::connections') }
+      it { is_expected.to contain_file('/etc/ppp/chap-secrets') }
+
+      it { is_expected.to contain_class('kmod') }
+      it { is_expected.to contain_kmod__load('ppp_mppe') }
+      it { is_expected.to contain_file('/etc/modules-load.d/pptp.conf') }
+
       it { is_expected.not_to contain_file('/sbin/pon') }
       it { is_expected.not_to contain_file('/sbin/poff') }
 
       case os_facts[:osfamily]
       when 'Debian'
         it { is_expected.not_to contain_package('pptp-linux') }
+        it { is_expected.to contain_class('firewalld') }
       when 'RedHat'
         it { is_expected.not_to contain_package('pptp') }
+        it { is_expected.to contain_class('firewalld') }
       when 'Suse'
         it { is_expected.not_to contain_package('pptp') }
+        it { is_expected.not_to contain_class('firewalld') }
+        it { is_expected.to contain_file('/etc/sysconfig/kernel') }
       end
     end
 
@@ -79,12 +117,25 @@ describe 'pptp' do
       it { is_expected.to contain_class('pptp::install') }
       it { is_expected.to contain_class('pptp::service') }
       it { is_expected.to contain_class('pptp::connections') }
+      it { is_expected.to contain_file('/etc/ppp/chap-secrets') }
+
       it { is_expected.not_to contain_class('kmod') }
       it { is_expected.not_to contain_kmod__load('ppp_mppe') }
       it { is_expected.not_to contain_file('/etc/modules-load.d/pptp.conf') }
 
+      it { is_expected.to contain_file('/sbin/pon') }
+      it { is_expected.to contain_file('/sbin/poff') }
+
       case os_facts[:osfamily]
+      when 'Debian'
+        it { is_expected.to contain_package('pptp-linux') }
+        it { is_expected.to contain_class('firewalld') }
+      when 'RedHat'
+        it { is_expected.to contain_package('pptp') }
+        it { is_expected.to contain_class('firewalld') }
       when 'Suse'
+        it { is_expected.to contain_package('pptp') }
+        it { is_expected.not_to contain_class('firewalld') }
         it { is_expected.not_to contain_file('/etc/sysconfig/kernel') }
       end
     end

@@ -3,6 +3,19 @@
 # Manage the client connections
 #
 class pptp::connections {
+
+  file { '/etc/ppp/chap-secrets':
+    ensure   => file,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0600',
+    seluser  => 'system_u',
+    selrole  => 'object_r',
+    seltype  => 'usr_t',
+    selrange => 's0',
+    content  => template('pptp/chap-secrets.epp'),
+  }
+
   if defined('$pptp::connections') {
     $pptp::connections.each |$connection| {
       file { $connection['name']:
