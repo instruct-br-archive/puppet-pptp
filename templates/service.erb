@@ -4,9 +4,9 @@ After=network.target
 [Service]
 Type=forking
 # PIDFile=/run/ppp-%i.pid
-ExecStart=/usr/sbin/pon %I
-ExecStop=/usr/sbin/poff %I
-ExecReload=/usr/sbin/poff -r %I
+ExecStart=/sbin/pon %I
+ExecStop=/sbin/poff %I
+ExecReload=/sbin/poff -r %I
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
