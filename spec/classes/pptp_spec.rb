@@ -14,7 +14,7 @@ describe 'pptp' do
 
       it { is_expected.to contain_class('kmod') }
       it { is_expected.to contain_kmod__load('ppp_mppe') }
-      it { is_expected.to contain_file('/etc/modules-load.d/pptp.conf') }
+      it { is_expected.not_to contain_file('/etc/modules-load.d/pptp.conf') }
 
       it { is_expected.to contain_file('/sbin/pon') }
       it { is_expected.to contain_file('/sbin/poff') }
@@ -51,7 +51,7 @@ describe 'pptp' do
 
       it { is_expected.to contain_class('kmod') }
       it { is_expected.to contain_kmod__load('ppp_mppe') }
-      it { is_expected.to contain_file('/etc/modules-load.d/pptp.conf') }
+      it { is_expected.not_to contain_file('/etc/modules-load.d/pptp.conf') }
 
       it { is_expected.not_to contain_class('firewalld') }
 
@@ -87,7 +87,7 @@ describe 'pptp' do
 
       it { is_expected.to contain_class('kmod') }
       it { is_expected.to contain_kmod__load('ppp_mppe') }
-      it { is_expected.to contain_file('/etc/modules-load.d/pptp.conf') }
+      it { is_expected.not_to contain_file('/etc/modules-load.d/pptp.conf') }
 
       it { is_expected.not_to contain_file('/sbin/pon') }
       it { is_expected.not_to contain_file('/sbin/poff') }

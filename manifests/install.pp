@@ -65,17 +65,6 @@ class pptp::install {
 
   if $pptp::module_manage {
     include ::kmod
-    file { '/etc/modules-load.d/pptp.conf':
-      ensure   => 'file',
-      owner    => 'root',
-      group    => 'root',
-      mode     => '0644',
-      seluser  => 'unconfined_u',
-      seltype  => 'etc_t',
-      selrange => 's0',
-      selrole  => 'object_r',
-      content  => "ppp_mppe\n",
-    }
 
     # HACK para carregar o modulo no SLES 12
     if 'Suse' == $facts['os']['family'] {
